@@ -21,7 +21,8 @@ var bio = {
  			"location":"Chicago, IL"
  			}, //end contacts object within bio object. note: it's NOT an array!
 	"bioPic":"images/sFlo.jpg",
-	"skills": ["kicking ass", "taking names", "javascript", "jQuery", "making candy", "racing motorcycles","eating food"]//skills is an array
+	"skills": ["JavaScript", "HTML5", "jQuery", "CSS", "C#","SQL", "PHP"],//skills is an array
+	"hobbies": ["Photography", "Motorcycling", "Baking", "Rock Climbing", "Yoga"]//hobbies is an array
 };//end bio object
 
 bio.DisplayBio = function() {
@@ -53,8 +54,16 @@ bio.DisplayBio = function() {
 		{
 			var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
 			$("#skills").append(formattedSkill);
-		}//end for
-	};//end if
+		}//end for skills
+	};//end if bio.skills
+
+	if(bio.hobbies.length > 0){
+		$("#header").append(HTMLhobbiesStart);
+		for(var j = 0; j < bio.hobbies.length; j++){
+			var formattedHobby = HTMLhobbies.replace("%data%", bio.hobbies[j]);
+			$("#hobbies").append(formattedHobby);
+		}//end for hobbies
+	};//end if bio.hobbies
 }//end fxn displayBio()
 
 
@@ -66,21 +75,21 @@ bio.DisplayBio = function() {
 	 		"title":"Front End Developer",
 	 		"location":"413 N. Carpenter St., Chicago, IL",
 	 		"dates":"August 2014 - present",
-	 		"description":"Making internet stuff sparkle!"
+	 		"description":"Primarily creating custom Wordpress sites; moving into custom application development using Meteor & MongoDB."
 	 	}, //end individual jobs object
 	 	{
  			"employer":"Morgan Services",
 	 		"title":"Software Development Intern",
 	 		"location":"323 N. Michigan Ave., Chicago, IL",
 	 		"dates":"February 2014 - June 2014",
-	 		"description":"C# Applications Development"
+	 		"description":"C# Applications Development of an in-house developed CRM utilizing C# in a Visual Studio 2010 environment on a MS SQL Server 2008 back end."
 	 	}, //end individual jobs object
 	 	{
  			"employer":"Fitness Formula Clubs",
 	 		"title":"Massage Therapist",
 	 		"location":"10 S. Clinton, Chicago, IL",
 	 		"dates":"February 2012 - present",
-	 		"description":"Top Producer of oily clients."
+	 		"description":"Massage Therapist. Top producer of service revenue for over two years based on in-house performance metrics."
 	 	} //end individual jobs object
  	]//end jobs array
  };//end work object
@@ -193,19 +202,19 @@ var projectObj = {
 	{
 		"title": "Builders Association of America Chicago Chapter",
 		"dates":"October 2014",
-		"description":"Convert an existing Windows-based CMS to custom Wordpress CMS.",
+		"description":"Convert an existing Windows-based CMS to custom Wordpress CMS.  Utilized event booking, informational news updates, and modified BuddyPress plugins.",
 		"image":"images/bldrs.png"
 	},//end individual project object
 	{
-		"title": "ChristKindlMarket Reservations App",
+		"title": "ChristKindlMarket Reservations Application",
 		"dates":"November 2014",
-		"description":"Wordpress-based reservations system for securing tables at a local Christmas market.",
+		"description":"Wordpress-based reservations system for securing tables at a local Christmas market which generated over $45,000 in reservations and product sales.",
 		"image":"images/christkindle.png"
 	},//end individual project object
 		{
 		"title": "TecnicoMoto",
 		"dates":"July 2014",
-		"description":"Personal website for Chicago-based motorcycle tecnician to use for blogging. Highly modified Wordpress theme utilizing custom photography",
+		"description":"Personal website for Chicago-based motorcycle tecnician to use for blogging and racing updates for sponsors. Utilized custom photography.",
 		"image":"images/tecnico.png"
 	}//end individual project object
 	]//end project array
