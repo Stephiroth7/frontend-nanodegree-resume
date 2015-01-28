@@ -1,9 +1,7 @@
 
 var name = "Stephany Floyd";
 var role = "Front-End Developer";
-
-//pulls data provided in resumebuilder.js above and uses the HTML of helper.js and inserts into index.html
-
+//on index.html, helper.js is called in the head and resumeBuilder.js is called in the bottom.
 //$("#main").append(skills); //lists the skills without spacing or anything
 // //$("#main").append(skills[0]);//lists the first item of zero based array
 // $("#main").append(bio.bioName);
