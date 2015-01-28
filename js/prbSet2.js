@@ -252,3 +252,200 @@ function totalBytes(results) {
     }
     return sum;
 }
+
+/**************************************************************************************
+For this quiz, use a jQuery class selector and featuredArticle variable to toggle the 'featured' class!
+*/
+// don't change this variable!
+var featuredArticle;
+
+featuredArticle = $( '.featured' );
+
+featuredArticle.toggleClass('featured');
+
+/*************************************************************************************
+For this quiz, remove the class 'featured' from Article #2 and add it to Article #3!
+You must use jQuery's toggleClass method!
+*/
+// don't change these variable!
+var article2, article3;
+
+article2 = $(".featured");
+article3 = article2.next(".article-item");
+
+article2.toggleClass("featured");
+article3.toggleClass("featured");
+/*************************************************************************************
+For this quiz, set the href of the <a> in the first nav item to "#1".
+
+You must use jQuery's attr() method!
+*/
+// Start with this variable!
+var navList, first;
+
+console.log("Stephany!");
+navList = $(".nav-item");
+
+firstLink = navList.first().children("a").attr("href","#1");
+
+/*************************************************************************************
+For this quiz, change the font-size of all the article-items to 20px!
+
+You must use jQuery's css() method!
+*/
+// Start with this variable!
+var articleItems;
+
+articleItems = $(".article-item");
+articleItems.css("font-size", "20px");
+
+
+/************************************************************************************
+MAKING LIVE CHANGES
+For this quiz, use jQuery's val method to make live changes to the 'Cool Articles' <h1>!
+
+The starter code below creates an event listener that will run any time the input changes.
+For more on events, check the instructor notes.
+
+//make the value of the text in the h1 tags to be the same as what's written in the input box
+*/
+
+
+$('#input').on('change', function() { //this code is an event listener
+    var val, headerText;
+    
+    val = $("#input").val();
+    
+    headerText = $(".articles").children("h1");// Your code goes here!
+    headerText.text(val);
+    //what this does: 
+    //1. declare two variables, val and headerText
+    //2. assign val the VALUE of the input box with the ID of #input
+    //3. assign headerText the value of the H1 child element of the .articles class
+    //4. assign the header text the value of the variable 'val' using the .val() function.
+    
+});
+
+
+/*************************************************************************************
+REMOVE HTML
+For this quiz, remove the <ul> from the first article item!
+
+You must use jQuery's remove() method.
+*/
+
+
+var articleItems, ul;
+
+articleItems = $(".article-item");
+
+ul = articleItems.children("ul");//now it includes both UL and LI elemtns
+
+ul.remove();
+
+/*************************************************************************************
+selectedItem.append() adds the parameter as a LAST child element of the selected item
+selectedItem.prepend() adds the parameter as a FIRST child element of the selected item
+
+selectedItem.insertBefore() creates sibling elements by adding (parameter) siblings before the selected item 
+selectedItem.insertAfter() creates sibling elements by adding (parameter) siblings after the selected item
+
+For this quiz, you'll need to add to the DOM tree that already exists.
+
+'#family2' should be a sibling of and come after '#family1'. '#bruce' should be the only immediate child
+of '#family2'. '#bruce' should have two <div>s as children, '#madison' and '#hunter'.
+*/
+
+var fam1, fam2, bruce, mads, hunt;
+
+fam2 = $("<div id='family2'></div>").insertAfter("#family1");
+fam2.prepend('<h1>Family2</h1>');
+
+fam2.append('<div id="bruce"></div>');
+bruce = $('#bruce');
+bruce.prepend('<h2>Bruce</h2>');
+
+bruce.append('<div id="madison"></div>');
+bruce.append('<div id="hunter"></div>');
+
+mads = $('#madison');
+hunt = $('#hunter');
+
+mads.append('<h3>Madison</h3>');
+hunt.append('<h3>Hunter</h3>');
+
+
+/**************************************************************************
+the .each() iterator
+in jQuery, the $this refers to the DOM element itself
+
+For this quiz, use jQuery's each() method to iterate through the <p>s,
+calculate the length of each one, and add each length to the end of each <p>.
+
+Also, make sure you don't change the text inside each <p>, otherwise your
+lengths won't be correct!
+*/
+
+// Your code goes here!
+
+var sum, index, pTags, string, strLnth;
+
+pTags = $("p");
+//console.log(pTags);
+pTags.each( function(){
+    
+    //console.log(index); //index is each <pTag>
+    string = $(this).text();
+    
+    strLnth =  string.length;
+    
+    $(this).append(strLnth);
+}
+);
+
+// A function passed into the jQuery object runs on document.ready, which occurs after the DOM has been loaded.
+
+// Why is this useful?
+
+// External JavaScript files in the <head> of a document are generally downloaded earlier than JavaScript files included in the <body>. JavaScript files are also executed immediately at their location in the document, which means they can't access any DOM elements that come after their <script> tag in the DOM. This leads to some interesting situations.
+
+// Imagine you're building a website and you've got a script you want to run against some DOM elements in the page. If you include your script in the <head> normally, it will run as soon as it's downloaded, which will occur before the DOM has built the elements you want your script to run against. So your script wouldn't be able to do anything.
+
+// You could include your script at the bottom of the <body>, but that would mean that the download could potentially start later in the load process, slowing down the initial page render.
+
+// So what can you do?
+
+// Pass your function into the jQuery object, like so:
+
+// function someFunction() {
+//     // Do interesting things
+// }
+// $(someFunction)
+// or
+
+// $(function(){
+//     // Do interesting things
+// })
+// Now, you can include your script in the <head> and it won't run until the DOM has been built and the elements that you want to manipulate are on the page.
+/*********************************************************************************
+
+For this quiz, can you use this script, which is in the <head> of index.html,
+to change the boring placeholder image to a picture of a cute puppy?
+
+Remember, you'll need to pass a function into the jQuery object to run 
+when the document is ready.
+
+Here's a URL for a picture of a puppy: http://placepuppy.it/350/150 or http://placekitten.com/350/150
+
+****************************************************************/
+
+
+
+$(function(){
+
+img1 = $('img[alt="Placeholder Image"]');
+src2 = 'http://placekitten.com/350/150';
+src1 = img1.attr('src');
+
+img1.attr('src', src2)
+});
