@@ -13,25 +13,27 @@ These are HTML strings. As part of the course, you'll be using JavaScript functi
 replace the %data% placeholder text you see in them.
 */
 var HTMLheaderName = '<h1 id="name" class="pink text-center col-md-12">%data%</h1>';
-var HTMLheaderRole = '<span class="white-text text-center col-md-12">%data%</span><hr/>';
+var HTMLheaderRole = '<h3 class="pink text-center col-md-12">%data%</h3><hr/>';
 
 
 
 
 
-var HTMLcontactGeneric = '<li class="flex-item"><span class="green">%contact%</span><span class="white-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="blue">mobile</span><span class="white-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="green">email</span><span class="white-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="blue">twitter</span><span class="white-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item "><span class="green">github</span><span class="white-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item "><span class="green">blog</span><span class="white-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item "><span class="blue">location</span><span class="white-text">%data%</span></li>';
+var HTMLcontactGeneric = '<li class="flex-item"><span class="green">%contact%</span><span class="white">%data%</span></li>';
+var HTMLmobile = '<li class="flex-item"><span class="blue">mobile</span><span class="white">%data%</span></li>';
+var HTMLemail = '<li class="flex-item"><span class="blue">email</span><span class="white">%data%</span></li>';
+var HTMLtwitter = '<li class="flex-item"><span class="blue">twitter</span><span class="white">%data%</span></li>';
+var HTMLgithub = '<li class="flex-item "><span class="blue">github</span><span class="white">%data%</span></li>';
+var HTMLblog = '<li class="flex-item "><span class="blue">blog</span><span class="white">%data%</span></li>';
+var HTMLlocation = '<li class="flex-item "><span class="blue">location:</span><span class="white">%data%</span></li>';
 
 var HTMLbioPic = '<img src="%data%" class="biopic img-responsive col-md-3">';
-var HTMLWelcomeMsg = '<h2 class="welcome-message orange-text">%data%</h2>';
+var HTMLWelcomeMsg = '<h2 class="welcome-message orange">%data%</h2>';
 
-var HTMLskillsStart = '<h3 id="skillsH3" class="orange-text col-md-9">Skills at a Glance:</h3><ul id="skills" class="flex-box col-md-9"></ul>';
-var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+var HTMLskillsStart = '<h3 id="skillsH3" class="blue col-md-9">Skills at a Glance:</h3><ul id="skills" class="flex-box col-md-9"></ul>';
+var HTMLskills = '<li class="flex-item"><span class="white">%data%</span></li>';
+var HTMLhobbiesStart = '<h3 id="hobbiesH3" class="blue col-md-9">Hobbies:</h3><ul id="hobbies" class="flex-box col-md-9"></ul>';
+var HTMLhobbies = '<li class="flex-item"><span class="white">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
 var HTMLworkEmployer = '<a class="orange" href="#">%data%';
@@ -47,14 +49,14 @@ var HTMLprojectDescription = '<p class="project-desc"><br>%data%</p>';
 var HTMLprojectImage = '<img class="project-img" src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry col-md-6"></div>';
-var HTMLschoolName = '<a class="green" href="#">%data%';
+var HTMLschoolName = '<a class="pink" href="#">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
 var HTMLschoolMajor = '<p><br>Major: %data%</p>';
 
 var HTMLonlineClasses = '<!--<h2 class="orange">Digital</h2>-->';
-var HTMLonlineTitle = '<a class="green" href="#">%data%';
+var HTMLonlineTitle = '<a class="pink" href="#">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineURL = '<br><a href="#">%data%</a>';
@@ -121,6 +123,7 @@ var styles = [
   {
     stylers: [
       { saturation: 0 }
+      
     ]
   }
 ];
@@ -167,7 +170,7 @@ map.setOptions({styles: styles}); //why is it styles:styles?  is it JSON obj?
     }
     return names;
   }
-  console.log( nameFinder() );
+  //console.log( nameFinder() );
 
   /*
   createMapMarker(placeData) reads Google Places search results to create map pins.
@@ -191,21 +194,17 @@ map.setOptions({styles: styles}); //why is it styles:styles?  is it JSON obj?
     });
     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
 
-    // infoWindows are the little helper windows that open when you click
+    // infoWindows and infoBubbles are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-
-      
-      
-      content: name //name comes from the global variable declared above: it's the formatted address.
-      
-
+      content: '<div class="black">' + name + '</div>'
+      //name comes from the name variable declared above: it's the formatted address.
+      //and wrapped in a div to make the text black.
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
       infoWindow.open(map,marker);
     });
 
