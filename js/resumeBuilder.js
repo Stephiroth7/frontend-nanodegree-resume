@@ -117,7 +117,7 @@ if(work.jobs.length > 0){
  		{
  		"name":"DeVry University",
  		"location":"Chicago, IL",
- 		"degree":"BS",
+ 		"degree":"Bachelor of Science",
  		"majors":["Enterprise Systems Analysis"],//school major is an array by itself
  		"dates":"2014",
  		"url":"http://www.devry.edu/"
@@ -125,7 +125,7 @@ if(work.jobs.length > 0){
  	{
  		"name":"College of DuPage",
  		"location":"Glen Ellyn, IL",
- 		"degree":"AA",
+ 		"degree":"Associates of Arts",
  		"majors":["Business"],
  		"dates":"2007" ,
  		"url":"http://www.cod.edu/"
@@ -154,7 +154,7 @@ if(work.jobs.length > 0){
  }; //end education object
 
 education.DisplayEducation = function(){
-console.log(education.schools.length);
+
 var formattedSchool, formattedOnline;
 $("#education").append(HTMLschoolStart);
 //console.log("education.schools.length: " + education.schools.length);
@@ -262,13 +262,14 @@ function inName(_string){
 
 	var last = stringArr[strArrLength].toUpperCase();
 
-	return stringArr[0].slice(0,1) + stringArr[0].slice(1).toLowerCase() + " " + last; //capitalizes first letter of first name and appends the rest of the string, then adds space  and then last name.
+	return stringArr[0].slice(0,1) + stringArr[0].slice(1).toLowerCase() + " " + last; 
+	//capitalizes first letter of first name and appends the rest of the string, then adds space  and then last name.
 }
 
 /**********************
 sometimes, a function works because it is using an object on the global scope, 
 so it is accessible to a function that's also on the global scope.  when the function isn't encapsulated
-in an object, that's what's going on.
+in an object, that's what's going on.  These (below) are encapsulated functions.
 ***********************/
 work.DisplayWork();
 projectObj.DisplayProjects();
@@ -277,3 +278,4 @@ education.DisplayEducation();
 
 
 $("#mapDiv").append(googleMap);
+$("#footerContacts").append(HTMLcontactGeneric);
