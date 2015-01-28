@@ -1,13 +1,14 @@
+// $("#main").append(skills[0]);//lists the first item of zero based array
+// $("#main").append(work["empPosition"]); //this is bracket notation and WILL ALWAYS WORK
+// $("#main").append(education.schoolName); // this is dot notation and doesn't always work.
 
+
+/*******************************************************
+format is JSON object, then display function.  
+All display functions are called at the bottom of the page.
+********************************************************/
 var name = "Stephany Floyd";
 var role = "Front-End Developer";
-//on index.html, helper.js is called in the head and resumeBuilder.js is called in the bottom.
-//$("#main").append(skills); //lists the skills without spacing or anything
-// //$("#main").append(skills[0]);//lists the first item of zero based array
-// $("#main").append(bio.bioName);
-// $("#main").append(work["empPosition"]); //bracket notation
-//$("#main").append(education.schoolName); //dot notation
-
 var bio = {
 	"name":"Stephany Floyd",
 	"role":"Front-End Developer",
@@ -18,13 +19,12 @@ var bio = {
  			"github":"stephiroth7",
  			"twitter":"@stephiroth7",
  			"location":"Chicago, IL"
- 			}, //contacts object
+ 			}, //end contacts object within bio object. note: it's NOT an array!
 	"bioPic":"images/sFlo.jpg",
-	"skills": ["kicking ass", "taking names", "javascript", "jQuery", "making candy", "racing motorcycles","eating food"]
+	"skills": ["kicking ass", "taking names", "javascript", "jQuery", "making candy", "racing motorcycles","eating food"]//skills is an array
 };//end bio object
 
 bio.DisplayBio = function() {
-
 	//declare vars
 	var formattedContactInfo, formattedRole, formattedName, formattedBioPic, formattedWelcome;
 
@@ -55,7 +55,7 @@ bio.DisplayBio = function() {
 			$("#skills").append(formattedSkill);
 		}//end for
 	};//end if
-}
+}//end fxn displayBio()
 
 
 
@@ -92,15 +92,15 @@ if(work.jobs.length > 0){
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
 		//there is a work object that has an array of jobs objects inside it.
-		//the word "job" is being used as the INDEX of the jobs array to get to the jobs object's elements
-		// workObject.jobsArrayItem[job].jobsArrayItemElement
+		//the word "job" is being used as the INDEX of the jobs array to get to the jobs object's elements. you could use anything else instead.
+		// format is: workObject.jobsArrayItem[job].jobsArrayItemElement
 		var formattedWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
 		var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
 		var formattedWorkDates = HTMLworkDates.replace("%data%",work.jobs[job].dates) ;
 		var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
 
 		var formattedWorkHistory = formattedEmployer + formattedWorkTitle + formattedWorkLocation + 
-		formattedWorkDates + formattedWorkDescription; //concatenates everything together
+		formattedWorkDates + formattedWorkDescription; //concatenates everything together. 
 		
 		$(".work-entry:last").append(formattedWorkHistory);
 		//the jQuery element:last selector picks the very last element of a group of things.
@@ -129,7 +129,7 @@ if(work.jobs.length > 0){
  		"url":"http://www.cod.edu/"
  	}
  	],//end school array
- 	"onlineCourses": [ //onlinecourses is an array of objects
+ 	"onlineCourses": [ //onlinecourses is an array of online courses objects
  	{
  		"title":"HTML & CSS",
  		"dates":"2014",
@@ -153,36 +153,40 @@ if(work.jobs.length > 0){
 
 education.DisplayEducation = function(){
 
-var formattedSchool, formattedOnline;
+var formattedSchool, formattedOnline; //function-level variables to handle separation of brick&mortar and online education.
+//BEGIN EDUCATION 
 $("#education").append(HTMLschoolStart);
-//console.log("education.schools.length: " + education.schools.length);
-	for(var i = 0; i < education.schools.length; i++){
-		
-		formattedSchool = HTMLschoolName.replace("%data%", education.schools[i].name); 
-		formattedSchool += HTMLschoolDegree.replace("%data%", education.schools[i].degree);
-		formattedSchool += HTMLschoolDates.replace("%data%", education.schools[i].dates);
-		formattedSchool += HTMLschoolLocation.replace("%data%", education.schools[i].location);
-		//console.log(education.schools[i].majors.length);
-		for(var j = 0; j < education.schools[i].majors.length; j++){
-			//console.log( "j= " + j);
-		 	formattedSchool += HTMLschoolMajor.replace("%data%", education.schools[i].majors[j]);
-		 	$(".education-entry:last").append(formattedSchool);
-		 	}//end for majors
-		//$(".education-entry:last").append(formattedSchool);
-	}//end for schools
+for(var i = 0; i < education.schools.length; i++){
+	formattedSchool = HTMLschoolName.replace("%data%", education.schools[i].name); 
+	formattedSchool += HTMLschoolDegree.replace("%data%", education.schools[i].degree);
+	formattedSchool += HTMLschoolDates.replace("%data%", education.schools[i].dates);
+	formattedSchool += HTMLschoolLocation.replace("%data%", education.schools[i].location);
+	
+	for(var j = 0; j < education.schools[i].majors.length; j++){ 
+		//a separate for-loop to deal with the array of majors within the array of schools	
+	 	formattedSchool += HTMLschoolMajor.replace("%data%", education.schools[i].majors[j]);
+	 	$(".education-entry:last").append(formattedSchool);
+	 	//the jQuery element:last selector picks the very last element of a group of things.
+		//in this instance, it is the very last element of the "education-entry" class group
+	 	}//end for majors
+	
+}//end for schools
 
-	$("#education").append(HTMLonlineClasses);
-	$("#education").append(HTMLschoolStart);
-	for(var i = 0; i < education.onlineCourses.length; i++){
-		//console.log(education.onlineCourses[i].title);
-		formattedOnline = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title);
-		formattedOnline += HTMLonlineSchool.replace("%data%", education.onlineCourses[i].name);
-		formattedOnline += HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
-		formattedOnline += HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
-		//console.log(formattedOnline);
-		$(".education-entry:last").append(formattedOnline);
+//BEGIN ONLINE COURSES 
+$("#education").append(HTMLonlineClasses);
+$("#education").append(HTMLschoolStart);
+for(var i = 0; i < education.onlineCourses.length; i++){
+	
+	formattedOnline = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title);
+	formattedOnline += HTMLonlineSchool.replace("%data%", education.onlineCourses[i].name);
+	formattedOnline += HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
+	formattedOnline += HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
+	$(".education-entry:last").append(formattedOnline);
+	//the jQuery element:last selector picks the very last element of a group of things.
+	//in this instance, it is the very last element of the "work-entry" class group; 
+	//I modified this to have better separation of online courses vs. brick & mortar
 	}//end for online
-}
+}//end fxn displayEducation()
 
 var projectObj = {
 	"projects" : [
@@ -215,24 +219,20 @@ projectObj.DisplayProjects = function() {
 			//console.log(i);
 			$("#projects").append(HTMLprojectStart);
 			formattedProjectTitle = HTMLprojectTitle.replace("%data%", projectObj.projects[i].title);
-			//$(".project-entry:last").append(formattedProjectTitle);
 			formattedProjectDates = HTMLprojectDates.replace("%data%", projectObj.projects[i].dates);
-			//$(".project-entry:last").append(formattedProjectDates);
 			formattedProjectDesc = HTMLprojectDescription.replace("%data%", projectObj.projects[i].description);
-			//$(".project-entry:last").append(formattedProjectDesc);
-			
-			if(projectObj.projects[i].image.length > 0){ //checks to see if there is a string in the image url place
-				console.log("project image " + i);
+
+			if(projectObj.projects[i].image.length > 0){ 
+				//checks to see if there is a string in the image url place, otherwise skips over
 				formattedProjImg = HTMLprojectImage.replace("%data%", projectObj.projects[i].image);
-				//$(".project-entry:last").append(formattedProjImg);
-			}//end if images
+			}//end if images length
 
 			formattedProjects = formattedProjectTitle + formattedProjectDates + formattedProjectDesc + formattedProjImg;
 		
 			$(".project-entry:last").append(formattedProjects);
 		}//end for i
 	}//end if projLength
-}
+}//end fxn displayProjects()
 
 
 
