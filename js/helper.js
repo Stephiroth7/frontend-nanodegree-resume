@@ -119,7 +119,7 @@ function initializeMap() {
     disableDefaultUI: true
   };
 //added by sfloyd to make map 100% desaturated
-var styles = [
+var mapStyles = [
   {
     stylers: [
       { saturation: 0 }
@@ -133,7 +133,7 @@ var styles = [
   // <div id="map">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
   //call to setOptions() with style array to desaturate map
-map.setOptions({styles: styles}); //why is it styles:styles?  is it JSON obj?
+map.setOptions({styles: mapStyles}); //what this does: set a property of the map called styles to the variable declared called mapStyles
 
   /*
   locationFinder() returns an array of every location string from the JSONs
